@@ -60,23 +60,11 @@ $(function () {
   });
   // Click to see password
   $(".password i").click(function () {
-    const icon = $(this);
-    const input = icon.closest(".password").find("input");
-
-    if (input.attr("type") === "password") {
-      input.attr("type", "text");
-      icon.removeClass("fa-eye").addClass("fa-eye-slash");
+    if ($(".password input").attr("type") === "password") {
+      $(this).next().attr("type", "text");
     } else {
-      input.attr("type", "password");
-      icon.removeClass("fa-eye-slash").addClass("fa-eye");
+      $(".password input").attr("type", "password");
     }
-
-    // old code
-    // if ($(".password input").attr("type") === "password") {
-    //   $(this).next().attr("type", "text");
-    // } else {
-    //   $(".password input").attr("type", "password");
-    // }
   });
   // Create Steps Image
   $(".steps ul li:first-child")
