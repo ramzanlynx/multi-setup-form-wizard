@@ -87,19 +87,17 @@ $(function () {
     .append('<span class="step-order">Step 04</span>');
   // Count input
   $(".quantity span").on("click", function () {
-    var $button = $(this);
-    var oldValue = $button.parent().find("input").val();
+    const $button = $(this);
+    const $input = $button.parent().find("input");
+    const currentVal = parseFloat($input.val()) || 0;
 
-    if ($button.hasClass("plus")) {
-      var newVal = parseFloat(oldValue) + 1;
-    } else {
-      // Don't allow decrementing below zero
-      if (oldValue > 0) {
-        var newVal = parseFloat(oldValue) - 1;
-      } else {
-        newVal = 0;
-      }
-    }
-    $button.parent().find("input").val(newVal);
+    const min = parseFloat($input.attr("min")) || 0;
+    const max = parseFloat($input.attr("max")) || Infinity;
+
+    const newVal = $button.hasClass("plus")
+      ? Math.min(currentVal + 1, max)
+      : Math.max(currentVal - 1, min);
+
+    $input.val(newVal);
   });
 });
