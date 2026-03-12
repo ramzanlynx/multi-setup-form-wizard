@@ -1,4 +1,4 @@
-const initWizard = () => {
+export const initWizard = () => {
   $("#wizard").steps({
     headerTag: "h4",
     bodyTag: "section",
