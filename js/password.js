@@ -1,4 +1,4 @@
-export const initPasswordToggle = () => {
+(function () {
   $(".password i").click(function () {
     if ($(".password input").attr("type") === "password") {
       $(this).next().attr("type", "text");
@@ -6,4 +6,4 @@ export const initPasswordToggle = () => {
       $(".password input").attr("type", "password");
     }
   });
-};
+});

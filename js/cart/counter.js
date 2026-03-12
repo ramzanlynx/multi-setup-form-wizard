@@ -1,4 +1,4 @@
-export const initCounter = () => {
+$(function () {
   $(".quantity span").on("click", function () {
     const $button = $(this);
     const $input = $button.parent().find("input");
@@ -13,4 +13,4 @@ export const initCounter = () => {
 
     $input.val(newVal);
   });
-};
+});

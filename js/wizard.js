@@ -1,4 +1,4 @@
-export const initWizard = () => {
+$(function () {
   $("#wizard").steps({
     headerTag: "h4",
     bodyTag: "section",
@@ -58,4 +58,4 @@ export const initWizard = () => {
   $(".backward").click(function () {
     $("#wizard").steps("previous");
   });
-};
+});
