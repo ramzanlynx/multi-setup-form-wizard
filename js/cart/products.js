@@ -1,0 +1,3 @@
+// $(function () {
+//   $("#shop_table");
+// });
