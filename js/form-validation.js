@@ -261,3 +261,11 @@ function validate(fieldId) {
   setFieldState(fieldId, state);
   return true;
 }
+
+// Do validation on blur
+$(document).on("blur", "input, select, textarea", function () {
+  const fieldId = $(this).attr("id");
+  if (fieldId && typeof validate === "function" && RULES[fieldId]) {
+    validate(fieldId);
+  }
+});

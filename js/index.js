@@ -4,3 +4,4 @@ import "./wizard.js";
 import "./password.js";
 import "./cart/counter.js";
 import "./setup-ui.js";
+import "./form-validation.js";
