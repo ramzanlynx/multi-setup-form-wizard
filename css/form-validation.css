@@ -1,5 +1,5 @@
 /* Validation message */
-.validation-message {
+/*.validation-message {
   display: none;
   font-size: 11px;
   margin-top: 4px;
@@ -16,7 +16,7 @@
 }
 
 /* Validation icon */
-.validation-icon {
+/*.validation-icon {
   position: absolute;
   right: 12px;
   top: 50%;
@@ -32,7 +32,7 @@
 }
 .validation-icon.error {
   color: #dc3545;
-}
+}*/
 
 /* Input border states */
 .form-control.valid {
