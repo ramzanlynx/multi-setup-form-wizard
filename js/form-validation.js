@@ -274,10 +274,9 @@ export function validate(fieldId) {
   return true;
 }
 
-// Do validation on blur
-$(document).on("blur", "input, select, textarea", function () {
+$(document).on("input", ".form-control", function () {
   const fieldId = $(this).attr("id");
   if (fieldId && typeof validate === "function" && RULES[fieldId]) {
-    VALIDATED = validate(fieldId);
+    validate(fieldId);
   }
 });

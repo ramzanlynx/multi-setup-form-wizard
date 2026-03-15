@@ -56,3 +56,9 @@ export function getCartTotals() {
 export function clearCart() {
   sessionStorage.removeItem(CART_KEY);
 }
+
+// ── Check if cart has at least one item picked ─────────────────────
+export function hasCartItems() {
+  const cartItems = getCart();
+  return cartItems.some((item) => item.qty > 0);
+}

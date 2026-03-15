@@ -90,8 +90,8 @@ img {
 
 .wrapper {
   width: 826px;
-  height: 620px;
-  padding: 63px 90px 0;
+  height: auto;
+  padding: 63px 90px 63px;
   background: #fff;
 }
 

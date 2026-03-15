@@ -1,4 +1,5 @@
 import { validate, fieldSteps } from "./form-validation.js";
+import { hasCartItems } from "./cart-storage.js";
 
 $(function () {
   let currentStep = 1;
@@ -23,12 +24,24 @@ $(function () {
     // Fires on every step change — swaps step indicator icons to reflect
     // which step is currently active. Returns true to allow the transition.
     onStepChanging: function (event, currentIndex, newIndex) {
-      const fieldsToValidate = fieldSteps[currentIndex];
+      if (newIndex > currentIndex) {
+        // Step 2 = My Cart (index 2)
+        if (currentIndex === 2) {
+          if (!hasCartItems()) {
+            alert("Please select at least one item from the cart.");
+            return false;
+          }
+        } else {
+          const fieldsToValidate = fieldSteps[currentIndex];
 
-      if (fieldsToValidate) {
-        const allValid = fieldsToValidate.every((fieldId) => validate(fieldId));
-        if (!allValid && currentIndex < newIndex) {
-          return false; // Block navigation
+          if (fieldsToValidate) {
+            const results = fieldsToValidate.map((fieldId) => validate(fieldId));
+
+            // Then: check if all passed
+            if (!results.every((result) => result)) {
+              return false;
+            }
+          }
         }
       }
 
