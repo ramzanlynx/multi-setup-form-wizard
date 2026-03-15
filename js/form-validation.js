@@ -274,9 +274,21 @@ export function validate(fieldId) {
   return true;
 }
 
-$(document).on("input", ".form-control", function () {
+// ── Debounce utility ───────────────────────────────────────────────
+function debounce(fn, delay = 300) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+// ── Debounced validation on input ────────────────────────────────
+const debouncedValidate = debounce(function () {
   const fieldId = $(this).attr("id");
   if (fieldId && typeof validate === "function" && RULES[fieldId]) {
     validate(fieldId);
   }
-});
+}, 200);
+
+$(document).on("input", ".form-control", debouncedValidate);

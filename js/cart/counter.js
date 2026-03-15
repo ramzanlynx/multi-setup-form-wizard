@@ -22,42 +22,8 @@ $(function () {
 
     // 2. broadcast to all listening modules
     $(document).trigger("cart:updated");
+
+    // 3. clear cart error if exists
+    $(".cart-error").remove();
   });
 });
-
-// ✅ Storing an object
-// const user = { name: "Sara", step: 2, email: "sara@example.com" };
-// sessionStorage.setItem("wizardData", JSON.stringify(user));
-
-// // ✅ Reading it back safely
-// function getSessionData(key) {
-//   try {
-//     const raw = sessionStorage.getItem(key);
-//     return raw ? JSON.parse(raw) : null;
-//   } catch (e) {
-//     console.warn("Failed to parse sessionStorage data:", e);
-//     return null;
-//   }
-// }
-
-// const saved = getSessionData("wizardData");
-// // → { name: "Sara", step: 2, email: "sara@example.com" }
-// console.log(saved);
-
-// function storageAvailable(type) {
-//   let storage;
-//   try {
-//     storage = window[type];
-//     const x = "__storage_test__";
-//     storage.setItem(x, x);
-//     storage.removeItem(x);
-//     return true;
-//   } catch (e) {
-//     return (
-//       e instanceof DOMException &&
-//       e.name === "QuotaExceededError" &&
-//       storage &&
-//       storage.length !== 0
-//     );
-//   }
-// }

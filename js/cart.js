@@ -1,6 +1,15 @@
 import { products } from "./data/products.js";
 import { getCart, getCartTotals } from "./cart-storage.js";
 
+// ── Debounce utility ───────────────────────────────────────────────
+function debounce(fn, delay = 300) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 // ── Template: builds one <tr> per product ─────────────────────────
 function createRowTemplate(product, cartItem) {
   return `
@@ -42,18 +51,35 @@ function createRowTemplate(product, cartItem) {
 
 // ── Render: reads from sessionStorage, rebuilds tbody ─────────────
 $(function () {
-  const renderCart = () => {
-    const cartItems = getCart(); // from sessionStorage
+  const renderCartRows = () => {
+    const cartItems = getCart();
     const $tbody = $("#shop_table tbody").empty();
 
-    $.each(products, function (i, product) {
+    products.forEach((product) => {
       const cartItem = cartItems.find((item) => item.id === product.id);
       $tbody.append(createRowTemplate(product, cartItem));
     });
   };
 
-  renderCart(); // initial render on page load
+  const renderTotals = () => {
+    const { subtotal, grandTotal } = getCartTotals();
 
-  // Re-render rows whenever any module signals the cart changed
-  $(document).on("cart:updated", renderCart);
+    $(".cart-subtotal td .woocommerce-Price-amount").html(
+      `<span class="woocommerce-Price-currencySymbol">$</span> ${subtotal.toFixed(2)}`,
+    );
+    $(".order-total td .woocommerce-Price-amount").html(
+      `<span class="woocommerce-Price-currencySymbol">$</span> ${grandTotal.toFixed(2)}`,
+    );
+  };
+
+  // Combined render function
+  const render = () => {
+    renderCartRows();
+    renderTotals();
+  };
+
+  render();
+
+  // Re-render whenever any module signals the cart changed
+  $(document).on("cart:updated", render);
 });
