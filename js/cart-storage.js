@@ -15,7 +15,14 @@ function buildInitialCart() {
 // ── Read ──────────────────────────────────────────────────────────
 export function getCart() {
   const stored = sessionStorage.getItem(CART_KEY);
-  return stored ? JSON.parse(stored) : buildInitialCart();
+  if (!stored) return buildInitialCart();
+
+  try {
+    return JSON.parse(stored);
+  } catch (e) {
+    console.warn("Invalid cart data in sessionStorage, resetting:", e);
+    return buildInitialCart();
+  }
 }
 
 // ── Write ─────────────────────────────────────────────────────────
