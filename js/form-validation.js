@@ -1,7 +1,24 @@
-// ─────────────────────────────────────────────
-// VALIDATION RULES — one entry per field id
-// ─────────────────────────────────────────────
-//
+export let VALIDATED = false;
+
+export const fieldSteps = {
+  0: [
+    "firstName",
+    "lastName",
+    "emailId",
+    "userId",
+    "country",
+    "state",
+    "city",
+    "phoneNumber",
+    "referenceCode",
+  ],
+  1: [
+    "currentPassword",
+    "confirmCurrentPassword",
+    "newPassword",
+    "confirmNewPassword",
+  ],
+};
 
 const RULES = {
   // ── Section 1: Basic Details ──────────────
@@ -86,9 +103,6 @@ const RULES = {
   },
 };
 
-// ─────────────────────────────────────────────
-// MESSAGES — human-friendly error text
-// ─────────────────────────────────────────────
 const MESSAGES = {
   firstName: {
     required: "First name is required",
@@ -168,9 +182,7 @@ const FieldState = Object.freeze({
 
 function getFieldValue(fieldId, rules) {
   const $el = $("#" + fieldId);
-  return !!rules.checkbox
-    ? $el.prop("checked") // checkbox → true/false
-    : $el.val().trim(); // text/select → string
+  return !!rules.checkbox ? $el.prop("checked") : $el.val().trim();
 }
 
 function getValidationError(fieldId, value, rules, msgs) {
@@ -225,9 +237,9 @@ function setFieldState(fieldId, state, message = "") {
   if ($icon.length) $icon.removeClass("show").text("");
 
   if (state === FieldState.VALID) {
-    $el.addClass("valid");
-    $msg.addClass("show success").html("✓ Looks good");
-    if ($icon.length) $icon.addClass("show").text("✓");
+    // $el.addClass("valid");
+    // $msg.addClass("show success").html("✓ Looks good");
+    // if ($icon.length) $icon.addClass("show").text("✓");
     return;
   }
 
@@ -239,7 +251,7 @@ function setFieldState(fieldId, state, message = "") {
   }
 }
 
-function validate(fieldId) {
+export function validate(fieldId) {
   // Guard: skip unknown fields gracefully
   const rules = RULES[fieldId];
   const msgs = MESSAGES[fieldId];
@@ -266,6 +278,6 @@ function validate(fieldId) {
 $(document).on("blur", "input, select, textarea", function () {
   const fieldId = $(this).attr("id");
   if (fieldId && typeof validate === "function" && RULES[fieldId]) {
-    validate(fieldId);
+    VALIDATED = validate(fieldId);
   }
 });

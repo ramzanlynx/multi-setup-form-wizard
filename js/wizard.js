@@ -1,4 +1,9 @@
+import { validate, fieldSteps } from "./form-validation.js";
+
 $(function () {
+  let currentStep = 1;
+  // let isCurrentStepValidated = true;
+
   // Initialize the jQuery Steps plugin on #wizard — configures step structure,
   // fade transition, custom button labels, and step indicator image swapping
   $("#wizard").steps({
@@ -18,6 +23,15 @@ $(function () {
     // Fires on every step change — swaps step indicator icons to reflect
     // which step is currently active. Returns true to allow the transition.
     onStepChanging: function (event, currentIndex, newIndex) {
+      const fieldsToValidate = fieldSteps[currentIndex];
+
+      if (fieldsToValidate) {
+        const allValid = fieldsToValidate.every((fieldId) => validate(fieldId));
+        if (!allValid && currentIndex < newIndex) {
+          return false; // Block navigation
+        }
+      }
+
       // Step 1: show active icon only when on step 0, default otherwise
       if (newIndex >= 1) {
         $(".steps ul li:first-child a img").attr("src", "images/step-1.png");
@@ -69,10 +83,12 @@ $(function () {
   // Advance the wizard to the next step when the custom Continue button is clicked
   $(".forward").click(function () {
     $("#wizard").steps("next");
+    currentStep++;
   });
 
   // Go back to the previous step when the custom Back button is clicked
   $(".backward").click(function () {
     $("#wizard").steps("previous");
+    currentStep--;
   });
 });
