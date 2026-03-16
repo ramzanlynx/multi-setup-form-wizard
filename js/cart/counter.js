@@ -1,4 +1,4 @@
-import { updateCartItemQty } from "../cart-storage.js";
+import { updateCartItemQty } from "../modules/cart-storage.js";
 
 $(function () {
   $(document).on("click", ".quantity span", function () {
