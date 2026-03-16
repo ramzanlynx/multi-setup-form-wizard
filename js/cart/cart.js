@@ -1,5 +1,5 @@
 import { products } from "../data/products.js";
-import { getCart, getCartTotals } from "../modules/cart-storage.js";
+import { getCart, getCartTotals, removeCartItem } from "../modules/cart-storage.js";
 
 // ── Debounce utility ───────────────────────────────────────────────
 function debounce(fn, delay = 300) {
@@ -79,6 +79,14 @@ $(function () {
   };
 
   render();
+
+  // Handle remove item button click
+  $(document).on("click", ".product-remove a", function (e) {
+    e.preventDefault();
+    const id = $(this).closest("tr").data("id");
+    removeCartItem(id);
+    $(document).trigger("cart:updated");
+  });
 
   // Re-render whenever any module signals the cart changed
   $(document).on("cart:updated", render);

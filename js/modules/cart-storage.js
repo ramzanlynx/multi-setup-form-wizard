@@ -69,3 +69,20 @@ export function hasCartItems() {
   const cartItems = getCart();
   return cartItems.some((item) => item.qty > 0);
 }
+
+// ── Remove item from cart ─────────────────────────────────────────
+export function removeCartItem(id) {
+  const cartItems = getCart();
+
+  const updatedItems = cartItems.map((item) => {
+    if (item.id !== id) return item;
+    return {
+      ...item,
+      qty: 0,
+      totalPrice: 0,
+    };
+  });
+
+  saveCart(updatedItems);
+  return updatedItems;
+}
