@@ -169,22 +169,22 @@
                 <td data-title="Subtotal">
                   <div class="checkbox">
                     <label>
-                      <input type="radio" name="shipping" checked /> Free Shipping
+                      <input type="radio" name="shipping" data-cost="0" checked /> Free Shipping
                       <span class="checkmark"></span>
                     </label>
                     <label>
-                      <input type="radio" name="shipping" /> Local pickup: <span>$</span><span>0.00</span>
+                      <input type="radio" name="shipping" data-cost="2.50" /> Local pickup: <span>$</span><span>2.50</span>
                       <span class="checkmark"></span>
                     </label>
                   </div>
                   <span>Calculate shipping</span>
                 </td>
               </tr>
-              <tr class="cart-subtotal">
-                <th>Service <span>(estimated for Vietnam)</span></th>
+              <tr class="cart-subtotal service-fee">
+                <th>Service <span>(estimated for Pakistan)</span></th>
                 <td data-title="Subtotal">
                   <span class="woocommerce-Price-amount amount">
-                    <span class="woocommerce-Price-currencySymbol">$</span>5.60
+                    <span class="woocommerce-Price-currencySymbol">$</span><span class="service-fee-value">5.60</span>
                   </span>
                 </td>
               </tr>

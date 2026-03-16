@@ -62,11 +62,19 @@ $(function () {
   };
 
   const renderTotals = () => {
-    const { subtotal, grandTotal } = getCartTotals();
+    const { subtotal, serviceFee, shippingCost, grandTotal } = getCartTotals();
 
-    $(".cart-subtotal td .woocommerce-Price-amount").html(
+    // Update subtotal
+    $(".cart-subtotal:not(.shipping) td .woocommerce-Price-amount").html(
       `<span class="woocommerce-Price-currencySymbol">$</span> ${subtotal.toFixed(2)}`,
     );
+
+    // Update service fee
+    $(".service-fee td .woocommerce-Price-amount").html(
+      `<span class="woocommerce-Price-currencySymbol">$</span> ${serviceFee.toFixed(2)}`,
+    );
+
+    // Update grand total
     $(".order-total td .woocommerce-Price-amount").html(
       `<span class="woocommerce-Price-currencySymbol">$</span> ${grandTotal.toFixed(2)}`,
     );
@@ -86,6 +94,11 @@ $(function () {
     const id = $(this).closest("tr").data("id");
     removeCartItem(id);
     $(document).trigger("cart:updated");
+  });
+
+  // Handle shipping method change
+  $(document).on("change", 'input[name="shipping"]', function () {
+    renderTotals();
   });
 
   // Re-render whenever any module signals the cart changed

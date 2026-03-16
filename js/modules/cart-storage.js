@@ -50,12 +50,19 @@ export function updateCartItemQty(id, newQty) {
 // ── Derived totals (computed from stored data) ────────────────────
 export function getCartTotals() {
   const SERVICE_FEE = 5.6;
+  const LOCAL_PICKUP_FEE = 2.5;
   const cartItems = getCart();
   const subtotal = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
 
+  // Get selected shipping method (default: free shipping = 0)
+  const shippingRadio = document.querySelector('input[name="shipping"]:checked');
+  const shippingCost = shippingRadio ? (shippingRadio.dataset.cost || 0) : 0;
+
   return {
     subtotal,
-    grandTotal: subtotal + SERVICE_FEE,
+    serviceFee: SERVICE_FEE,
+    shippingCost: parseFloat(shippingCost),
+    grandTotal: subtotal + SERVICE_FEE + parseFloat(shippingCost),
   };
 }
 
