@@ -1,5 +1,5 @@
 import { validate, fieldSteps } from "../modules/form-validation.js";
-import { hasCartItems } from "../modules/cart-storage.js";
+import { hasCartItems, getCart, getCartTotals } from "../modules/cart-storage.js";
 
 $(function () {
   // Step icon configuration: maps step index to active image
@@ -27,6 +27,15 @@ $(function () {
     } else {
       $(".actions ul").removeClass("step-4");
     }
+  }
+
+  // Reset form to initial state after submission
+  function resetForm() {
+    // Clear ALL session data (cart, form inputs, passwords, etc.)
+    sessionStorage.clear();
+
+    // Reload the page to reset everything (form, wizard)
+    window.location.reload();
   }
 
   // Initialize the jQuery Steps plugin on #wizard
@@ -75,8 +84,61 @@ $(function () {
     },
 
     onFinished: function (event, currentIndex) {
-      // Submit the form to the URL specified in action attribute
-      $("#wizard").submit();
+      // Prevent multiple submissions
+      if ($(this).data("submitting")) {
+        return;
+      }
+      $(this).data("submitting", true);
+
+      // Get form data
+      const data = {};
+
+      // Get all inputs, selects, and textareas with name attribute directly from the form
+      $("#wizard input[name], #wizard select[name], #wizard textarea[name]").each(function() {
+        const name = this.name;
+        let value = this.value;
+
+        // Handle checkboxes and radio buttons
+        if (this.type === 'checkbox' || this.type === 'radio') {
+          if (this.checked) {
+            data[name] = value || 'on';
+          }
+        } else {
+          data[name] = value;
+        }
+      });
+
+      // Add cart data
+      const cartItems = getCart();
+      const { subtotal, serviceFee, shippingCost, grandTotal } = getCartTotals();
+
+      // Add cart data to root level
+      data.cart = {
+        items: cartItems,
+        subtotal: subtotal,
+        serviceFee: serviceFee,
+        shippingCost: shippingCost,
+        grandTotal: grandTotal
+      };
+
+      // Submit via AJAX
+      const actionUrl = $("#wizard").attr("action");
+
+      $.ajax({
+        url: actionUrl,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function(response) {
+          alert("Order submitted successfully!");
+          resetForm();
+          $("#wizard").data("submitting", false);
+        },
+        error: function(xhr, status, error) {
+          alert("Error: " + error + "\nResponse: " + xhr.responseText);
+          $("#wizard").data("submitting", false);
+        }
+      });
     },
   });
 

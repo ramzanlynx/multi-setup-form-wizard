@@ -26,13 +26,13 @@
           <div class="form-row">
             <div class="form-holder">
               <i class="zmdi zmdi-account"></i>
-              <input id="firstName" type="text" class="form-control" placeholder="First Name" />
+              <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First Name" />
               <span id="firstName-msg" class="validation-message"></span>
               <span id="firstName-icon" class="validation-icon"></span>
             </div>
             <div class="form-holder">
               <i class="zmdi zmdi-account"></i>
-              <input type="text" id="lastName" class="form-control" placeholder="Last Name" />
+              <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name" />
               <span id="lastName-msg" class="validation-message"></span>
               <span id="lastName-icon" class="validation-icon"></span>
             </div>
@@ -40,13 +40,13 @@
           <div class="form-row">
             <div class="form-holder">
               <i class="zmdi zmdi-email"></i>
-              <input type="text" id="emailId" class="form-control" placeholder="Email ID" />
+              <input type="text" id="emailId" name="emailId" class="form-control" placeholder="Email ID" />
               <span id="emailId-msg" class="validation-message"></span>
               <span id="emailId-icon" class="validation-icon"></span>
             </div>
             <div class="form-holder">
               <i class="zmdi zmdi-account-box-o"></i>
-              <input type="text" class="form-control" id="userId" placeholder="Your User ID" />
+              <input type="text" class="form-control" id="userId" name="userId" placeholder="Your User ID" />
               <span id="userId-msg" class="validation-message"></span>
               <span id="userId-icon" class="validation-icon"></span>
             </div>
@@ -54,20 +54,20 @@
           <div class="form-row">
             <div class="form-holder">
               <i class="zmdi zmdi-map"></i>
-              <input type="text" id="country" class="form-control" placeholder="Country" />
+              <input type="text" id="country" name="country" class="form-control" placeholder="Country" />
               <span id="country-msg" class="validation-message"></span>
               <span id="country-icon" class="validation-icon"></span>
             </div>
             <div class="form-group">
               <div class="form-holder">
                 <i class="zmdi zmdi-pin"></i>
-                <input type="text" id="state" class="form-control" placeholder="State" />
+                <input type="text" id="state" name="state" class="form-control" placeholder="State" />
                 <span id="state-msg" class="validation-message"></span>
                 <span id="state-icon" class="validation-icon"></span>
               </div>
               <div class="form-holder">
                 <i class="zmdi zmdi-pin-drop"></i>
-                <input type="text" id="city" class="form-control" placeholder="City" />
+                <input type="text" id="city" name="city" class="form-control" placeholder="City" />
                 <span id="city-msg" class="validation-message"></span>
                 <span id="city-icon" class="validation-icon"></span>
               </div>
@@ -76,13 +76,13 @@
           <div class="form-row">
             <div class="form-holder">
               <i class="zmdi zmdi-smartphone-android"></i>
-              <input type="text" id="phoneNumber" class="form-control" placeholder="Phone Number" />
+              <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number" />
               <span id="phoneNumber-msg" class="validation-message"></span>
               <span id="phoneNumber-icon" class="validation-icon"></span>
             </div>
             <div class="form-holder password">
               <i class="zmdi zmdi-eye"></i>
-              <input type="password" id="referenceCode" class="form-control" placeholder="Reference Code" />
+              <input type="password" id="referenceCode" name="referenceCode" class="form-control" placeholder="Reference Code" />
               <span id="referenceCode-msg" class="validation-message"></span>
               <span id="referenceCode-icon" class="validation-icon"></span>
             </div>
@@ -95,7 +95,7 @@
           <h3>Password change</h3>
           <div class="form-row">
             <div class="form-holder w-100">
-              <input type="password" id="currentPassword" class="form-control" placeholder="Current Password" />
+              <input type="password" id="currentPassword" name="currentPassword" class="form-control" placeholder="Current Password" />
               <i class="zmdi zmdi-lock-open"></i>
               <span id="currentPassword-msg" class="validation-message"></span>
               <span id="currentPassword-icon" class="validation-icon"></span>
@@ -106,6 +106,7 @@
               <input
                 type="password"
                 id="confirmCurrentPassword"
+                name="confirmCurrentPassword"
                 class="form-control"
                 placeholder="Confirm Current Password" />
               <i class="zmdi zmdi-lock-open"></i>
@@ -115,7 +116,7 @@
           </div>
           <div class="form-row">
             <div class="form-holder w-100">
-              <input type="password" id="newPassword" class="form-control" placeholder="New Password" />
+              <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="New Password" />
               <i class="zmdi zmdi-lock-open"></i>
               <span id="newPassword-msg" class="validation-message"></span>
               <span id="newPassword-icon" class="validation-icon"></span>
@@ -123,7 +124,7 @@
           </div>
           <div class="form-row">
             <div class="form-holder w-100">
-              <input type="password" id="confirmNewPassword" class="form-control" placeholder="Confirm New Password" />
+              <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control" placeholder="Confirm New Password" />
               <i class="zmdi zmdi-lock-open"></i>
               <span id="confirmNewPassword-msg" class="validation-message"></span>
               <span id="confirmNewPassword-icon" class="validation-icon"></span>
@@ -169,11 +170,11 @@
                 <td data-title="Subtotal">
                   <div class="checkbox">
                     <label>
-                      <input type="radio" name="shipping" data-cost="0" checked /> Free Shipping
+                      <input type="radio" name="shipping" value="free" data-cost="0" checked /> Free Shipping
                       <span class="checkmark"></span>
                     </label>
                     <label>
-                      <input type="radio" name="shipping" data-cost="2.50" /> Local pickup: <span>$</span><span>2.50</span>
+                      <input type="radio" name="shipping" value="pickup" data-cost="2.50" /> Local pickup: <span>$</span><span>2.50</span>
                       <span class="checkmark"></span>
                     </label>
                   </div>
