@@ -95,6 +95,7 @@ const RULES = {
     minLength: 8,
     maxLength: 64,
     pattern: /^(?=.*[A-Z])(?=.*[0-9]).+$/, // at least 1 uppercase + 1 number
+    notMatchField: "currentPassword", // must be different from current password
   },
 
   confirmNewPassword: {
@@ -166,6 +167,7 @@ const MESSAGES = {
     required: "New password is required",
     minLength: "New password must be at least 8 characters",
     pattern: "Password must contain at least 1 uppercase letter and 1 number",
+    notMatchField: "New password must be different from current password",
   },
 
   confirmNewPassword: {
@@ -193,6 +195,14 @@ function getValidationError(fieldId, value, rules, msgs) {
 
   // Skip remaining checks if field is empty and not required
   if (!value) return null;
+
+  // Cross-field NOT match check FIRST (new password must be different from current)
+  if (rules.notMatchField) {
+    const otherValue = $("#" + rules.notMatchField).val()?.trim();
+    if (otherValue && value === otherValue) {
+      return msgs.notMatchField ?? "Must be different from current password";
+    }
+  }
 
   // Pattern check (not applicable to checkboxes)
   if (rules.pattern && !rules.checkbox) {
