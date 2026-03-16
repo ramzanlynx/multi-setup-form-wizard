@@ -1,5 +1,5 @@
-import { validate, fieldSteps } from "./form-validation.js";
-import { hasCartItems } from "./cart-storage.js";
+import { validate, fieldSteps } from "../modules/form-validation.js";
+import { hasCartItems } from "../modules/cart-storage.js";
 
 $(function () {
   // Step icon configuration: maps step index to active image
