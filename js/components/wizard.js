@@ -73,6 +73,11 @@ $(function () {
 
       return true;
     },
+
+    onFinished: function (event, currentIndex) {
+      // Submit the form to the URL specified in action attribute
+      $("#wizard").submit();
+    },
   });
 
   // Custom navigation buttons
