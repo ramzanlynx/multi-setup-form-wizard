@@ -1,9 +1,9 @@
 // import all the javascript modules
 
-import "./cart.js";
-import "./form-validation.js";
-import "./wizard.js";
-import "./password.js";
+import "./cart/cart.js";
+import "./modules/form-validation.js";
+import "./components/wizard.js";
+import "./components/password.js";
 import "./cart/counter.js";
-import "./setup-ui.js";
-import "./session.js";
+import "./components/setup-ui.js";
+import "./modules/session.js";

@@ -1,5 +1,5 @@
-import { products } from "./data/products.js";
-import { getCart, getCartTotals } from "./cart-storage.js";
+import { products } from "../data/products.js";
+import { getCart, getCartTotals } from "../modules/cart-storage.js";
 
 // ── Debounce utility ───────────────────────────────────────────────
 function debounce(fn, delay = 300) {

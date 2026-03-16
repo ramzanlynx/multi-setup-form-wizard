@@ -1,4 +1,4 @@
-import { products } from "./data/products.js";
+import { products } from "../data/products.js";
 
 const CART_KEY = "cart";
 
