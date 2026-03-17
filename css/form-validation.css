@@ -15,25 +15,6 @@
   color: #dc3545;
 }
 
-/* Validation icon */
-.validation-icon {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: none;
-  font-size: 16px;
-}
-.validation-icon.show {
-  display: inline-block;
-}
-.validation-icon.success {
-  color: #28a745;
-}
-.validation-icon.error {
-  color: #dc3545;
-}
-
 /* Input border states */
 .form-control.valid {
   border-color: #28a745 !important;

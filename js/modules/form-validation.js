@@ -239,24 +239,21 @@ function getValidationError(fieldId, value, rules, msgs) {
 function setFieldState(fieldId, state, message = "") {
   const $el = $("#" + fieldId);
   const $msg = $("#" + fieldId + "-msg");
-  const $icon = $("#" + fieldId + "-icon");
+  // const $icon = $("#" + fieldId + "-icon");
 
   // Always reset first — clean slate
   $el.removeClass("valid invalid");
   $msg.removeClass("show error success").text("");
-  if ($icon.length) $icon.removeClass("show").text("");
+  // if ($icon.length) $icon.removeClass("show").text("");
 
   if (state === FieldState.VALID) {
-    // $el.addClass("valid");
-    // $msg.addClass("show success").html("✓ Looks good");
-    // if ($icon.length) $icon.addClass("show").text("✓");
     return;
   }
 
   if (state === FieldState.INVALID) {
     $el.addClass("invalid");
     $msg.addClass("show error").html("⚠ " + message);
-    if ($icon.length) $icon.addClass("show").text("✗");
+    // if ($icon.length) $icon.addClass("show").text("✗");
     return;
   }
 }
