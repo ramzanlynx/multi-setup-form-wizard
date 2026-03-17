@@ -90,11 +90,15 @@ img {
 
 .wrapper {
   width: 826px;
-  height: auto;
+  height: 620px;
   padding: 63px 90px 63px;
   background: #fff;
 }
 
+/* .wrapper.show-warnings { */
+/*   height: auto; */
+/* } */
+/**/
 .wizard {
   position: relative;
 }
@@ -172,6 +176,7 @@ h3 {
 .form-holder {
   position: relative;
 }
+
 .form-holder i {
   position: absolute;
   top: 50%;
@@ -179,6 +184,15 @@ h3 {
   right: 20px;
   font-size: 16px;
 }
+
+.form-holder .validation-message {
+  position: absolute;
+  top: 93%;           /* Below the input */
+  left: 0;
+  margin-bottom: 00px;
+  width: 100%;
+}
+
 .form-holder i.zmdi-eye {
   cursor: pointer;
 }

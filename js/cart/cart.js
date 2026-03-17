@@ -2,13 +2,13 @@ import { products } from "../data/products.js";
 import { getCart, getCartTotals, removeCartItem } from "../modules/cart-storage.js";
 
 // ── Debounce utility ───────────────────────────────────────────────
-function debounce(fn, delay = 300) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), delay);
-  };
-}
+// function debounce(fn, delay = 300) {
+//   let timeoutId;
+//   return function (...args) {
+//     clearTimeout(timeoutId);
+//     timeoutId = setTimeout(() => fn.apply(this, args), delay);
+//   };
+// }
 
 // ── Template: builds one <tr> per product ─────────────────────────
 function createRowTemplate(product, cartItem) {
@@ -62,7 +62,7 @@ $(function () {
   };
 
   const renderTotals = () => {
-    const { subtotal, serviceFee, shippingCost, grandTotal } = getCartTotals();
+    const { subtotal, serviceFee, grandTotal } = getCartTotals();
 
     // Update subtotal
     $(".cart-subtotal:not(.shipping) td .woocommerce-Price-amount").html(
