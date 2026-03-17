@@ -259,6 +259,50 @@ h3 {
   width: 234px;
 }
 
+/* Loading state for submit button */
+.actions li:last-child a.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.actions li:last-child a.loading .btn-text {
+  display: none;
+}
+
+.actions li:last-child a.loading .loading-dots {
+  display: inline-flex;
+}
+
+.loading-dots {
+  display: none;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
 table.cart {
   width: 100%;
   font-size: 15px;

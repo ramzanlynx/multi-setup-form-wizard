@@ -90,6 +90,11 @@ $(function () {
       }
       $(this).data("submitting", true);
 
+      // Add loading state to finish button
+      const $finishBtn = $(".actions li:last-child a");
+      $finishBtn.addClass("loading");
+      $finishBtn.html('<span class="btn-text">Proceed to checkout</span><span class="loading-dots"><span></span><span></span><span></span></span>');
+
       // Get form data
       const data = {};
 
@@ -130,11 +135,15 @@ $(function () {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function(response) {
+          // Remove loading state
+          $finishBtn.removeClass("loading");
           alert("Order submitted successfully!");
           resetForm();
           $("#wizard").data("submitting", false);
         },
         error: function(xhr, status, error) {
+          // Remove loading state and restore button text
+          $finishBtn.removeClass("loading").html("Proceed to checkout");
           alert("Error: " + error + "\nResponse: " + xhr.responseText);
           $("#wizard").data("submitting", false);
         }
